@@ -1,4 +1,4 @@
-* [kayn Methods](#methods)
+* [rengar Methods](#methods)
 * [Endpoints](#endpoints)
 
 # Methods 

@@ -2,11 +2,11 @@
 
 const sortByIncWins = (a, b) => b.wins - a.wins
 
-const main = async kayn => {
-    const challengerLeague = await kayn.Challenger.list('RANKED_SOLO_5x5')
-    const players = challengerLeague.entries.sort(sortByIncWins)
-    console.log(players)
-    console.log(players[0].wins)
+const main = async rengar => {
+  const challengerLeague = await rengar.Challenger.list('RANKED_SOLO_5x5')
+  const players = challengerLeague.entries.sort(sortByIncWins)
+  console.log(players)
+  console.log(players[0].wins)
 }
 
 module.exports = main

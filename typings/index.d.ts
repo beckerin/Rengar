@@ -1,162 +1,162 @@
 import * as dtos from './dtos'
 import * as ddragonDtos from './ddragon-dtos'
 
-declare module 'kayn' {
-    export function Kayn(key?: string): (config?: KaynConfig) => KaynClass
+declare module 'rengar' {
+    export function Rengar(key?: string): (config?: RengarConfig) => RengarClass
 
-    class KaynClass {
+    class RengarClass {
         flushCache(cb?: callback<'OK'>): Promise<'OK'>
 
         public ChampionMastery: {
-            get: (summonerID: string) => (championID: number) => KaynRequest<dtos.ChampionMasteryV4ChampionMasteryDTO>
-            list: (summonerID: number) => KaynRequest<dtos.ChampionMasteryV4ChampionMasteryDTO[]>
-            totalScore: (summonerID: number) => KaynRequest<number>
+            get: (summonerID: string) => (championID: number) => RengarRequest<dtos.ChampionMasteryV4ChampionMasteryDTO>
+            list: (summonerID: number) => RengarRequest<dtos.ChampionMasteryV4ChampionMasteryDTO[]>
+            totalScore: (summonerID: number) => RengarRequest<number>
         }
 
         public Champion: {
             Rotation: {
-                list: () => KaynRequest<dtos.ChampionV3ChampionInfo>
+                list: () => RengarRequest<dtos.ChampionV3ChampionInfo>
             }
         }
 
         public Challenger: {
-            list: (queueName: queueName) => KaynRequest<dtos.LeagueV4LeagueListDTO>
+            list: (queueName: queueName) => RengarRequest<dtos.LeagueV4LeagueListDTO>
         }
 
         public CurrentGame: {
             by: {
-                summonerID: (summonerID: string) => KaynRequest<dtos.SpectatorV4CurrentGameInfo>
+                summonerID: (summonerID: string) => RengarRequest<dtos.SpectatorV4CurrentGameInfo>
             }
         }
 
         public DDragon: {
             Champion: {
-                get: (championName: string) => KaynDDragonRequest<ddragonDtos.DDragonChampionDTO>
-                list: () => KaynDDragonRequest<ddragonDtos.DDragonChampionListDTO>
-                listFull: () => KaynDDragonRequest<ddragonDtos.DDragonChampionDTO>
-                getDataById: () => KaynDDragonRequest<ddragonDtos.DDragonChampionDTO>
-                getDataByIdWithParentAsId: () => KaynDDragonRequest<ddragonDtos.DDragonChampionDTO>
-                listDataById: () => KaynDDragonRequest<ddragonDtos.DDragonChampionListDTO>
-                listDataByIdWithParentAsId: () => KaynDDragonRequest<ddragonDtos.DDragonChampionListDTO>
-                listFullDataById: () => KaynDDragonRequest<ddragonDtos.DDragonChampionDTO>
-                listFullDataByIdWithParentAsId: () => KaynDDragonRequest<ddragonDtos.DDragonChampionDTO>
+                get: (championName: string) => RengarDDragonRequest<ddragonDtos.DDragonChampionDTO>
+                list: () => RengarDDragonRequest<ddragonDtos.DDragonChampionListDTO>
+                listFull: () => RengarDDragonRequest<ddragonDtos.DDragonChampionDTO>
+                getDataById: () => RengarDDragonRequest<ddragonDtos.DDragonChampionDTO>
+                getDataByIdWithParentAsId: () => RengarDDragonRequest<ddragonDtos.DDragonChampionDTO>
+                listDataById: () => RengarDDragonRequest<ddragonDtos.DDragonChampionListDTO>
+                listDataByIdWithParentAsId: () => RengarDDragonRequest<ddragonDtos.DDragonChampionListDTO>
+                listFullDataById: () => RengarDDragonRequest<ddragonDtos.DDragonChampionDTO>
+                listFullDataByIdWithParentAsId: () => RengarDDragonRequest<ddragonDtos.DDragonChampionDTO>
             }
             Item: {
-                list: () => KaynDDragonRequest<ddragonDtos.DDragonItemWrapperDTO>
+                list: () => RengarDDragonRequest<ddragonDtos.DDragonItemWrapperDTO>
             }
             Language: {
-                list: () => KaynDDragonRequest<string[]>
+                list: () => RengarDDragonRequest<string[]>
             }
             LanguageString: {
-                list: () => KaynDDragonRequest<ddragonDtos.DDragonLanguageStringDTO>
+                list: () => RengarDDragonRequest<ddragonDtos.DDragonLanguageStringDTO>
             }
             Map: {
-                list: () => KaynDDragonRequest<ddragonDtos.DDragonMapDTO>
+                list: () => RengarDDragonRequest<ddragonDtos.DDragonMapDTO>
             }
             ProfileIcon: {
-                list: () => KaynDDragonRequest<ddragonDtos.DDragonProfileIconDTO>
+                list: () => RengarDDragonRequest<ddragonDtos.DDragonProfileIconDTO>
             }
             Realm: {
-                list: (region: region) => KaynDDragonRequest<ddragonDtos.DDragonRealmsDTO>
+                list: (region: region) => RengarDDragonRequest<ddragonDtos.DDragonRealmsDTO>
             }
             RunesReforged: {
-                list: () => KaynDDragonRequest<ddragonDtos.DDragonRunesReforgedDTO[]>
+                list: () => RengarDDragonRequest<ddragonDtos.DDragonRunesReforgedDTO[]>
             }
             SummonerSpell: {
-                list: () => KaynDDragonRequest<ddragonDtos.DDragonSummonerSpellDTO>
+                list: () => RengarDDragonRequest<ddragonDtos.DDragonSummonerSpellDTO>
             }
             Version: {
-                list: () => KaynDDragonRequest<string[]>
+                list: () => RengarDDragonRequest<string[]>
             }
         }
 
         public League: {
             by: {
-                uuid: (leagueUUID: string) => KaynRequest<dtos.LeagueV4LeagueListDTO>
+                uuid: (leagueUUID: string) => RengarRequest<dtos.LeagueV4LeagueListDTO>
             }
 
             Entries: {
-                bySummonerID: (encryptedSummonerID: string) => KaynRequest<dtos.LeagueV4LeagueEntryDTO[]>
-                list: (queue: queueName, tier: string, division: string) => KaynRequest<dtos.LeagueV4LeagueEntryDTO[]>
+                bySummonerID: (encryptedSummonerID: string) => RengarRequest<dtos.LeagueV4LeagueEntryDTO[]>
+                list: (queue: queueName, tier: string, division: string) => RengarRequest<dtos.LeagueV4LeagueEntryDTO[]>
             }
         }
 
         public Master: {
-            list: (queueName: queueName) => KaynRequest<dtos.LeagueV4LeagueListDTO>
+            list: (queueName: queueName) => RengarRequest<dtos.LeagueV4LeagueListDTO>
         }
 
         public Grandmaster: {
-            list: (queueName: queueName) => KaynRequest<dtos.LeagueV4LeagueListDTO>
+            list: (queueName: queueName) => RengarRequest<dtos.LeagueV4LeagueListDTO>
         }
 
         public Match: {
-            get: (matchID: number) => KaynRequest<dtos.MatchV4MatchDTO>
-            timeline: (matchID: number) => KaynRequest<dtos.MatchV4MatchTimelineDTO>
+            get: (matchID: number) => RengarRequest<dtos.MatchV4MatchDTO>
+            timeline: (matchID: number) => RengarRequest<dtos.MatchV4MatchTimelineDTO>
 
             Tournament: {
-                listMatchIDs: (tournamentCode: string) => KaynRequest<number[]>
-                get: (matchID: number, tournamentCode: string) => KaynRequest<dtos.MatchV4MatchDTO>
+                listMatchIDs: (tournamentCode: string) => RengarRequest<number[]>
+                get: (matchID: number, tournamentCode: string) => RengarRequest<dtos.MatchV4MatchDTO>
             }
         }
 
         public Matchlist: {
             by: {
-                accountID: (accountID: string) => KaynRequest<dtos.MatchV4MatchlistDTO>
+                accountID: (accountID: string) => RengarRequest<dtos.MatchV4MatchlistDTO>
             }
             Recent: {
                 by: {
-                    accountID: (accountID: string) => KaynRequest<dtos.MatchV4MatchlistDTO>
+                    accountID: (accountID: string) => RengarRequest<dtos.MatchV4MatchlistDTO>
                 }
             }
         }
 
         public Status: {
-            get: () => KaynRequest<dtos.LolStatusV3ShardStatus>
+            get: () => RengarRequest<dtos.LolStatusV3ShardStatus>
         }
 
         public Summoner: {
             by: {
-                name: (name: string) => KaynRequest<dtos.SummonerV4SummonerDTO>
-                id: (id: string) => KaynRequest<dtos.SummonerV4SummonerDTO>
-                accountID: (accountID: string) => KaynRequest<dtos.SummonerV4SummonerDTO>
+                name: (name: string) => RengarRequest<dtos.SummonerV4SummonerDTO>
+                id: (id: string) => RengarRequest<dtos.SummonerV4SummonerDTO>
+                accountID: (accountID: string) => RengarRequest<dtos.SummonerV4SummonerDTO>
             }
         }
 
         public ThirdPartyCode: {
             by: {
-                summonerID: (id: string) => KaynRequest<string>
+                summonerID: (id: string) => RengarRequest<string>
             }
         }
 
         public TournamentStub: {
-            create: (tournamentID: number, body?: dtos.TournamentStubV4TournamentCodeParameters) => KaynRequest<string[]>
-            lobbyEvents: (tournamentCode: string) => KaynRequest<dtos.TournamentStubV4LobbyEventDTOWrapper>
-            registerProviderData: (region: string, callbackURL: string) => KaynRequest<number>
-            register: (providerID: number, name?: string) => KaynRequest<number>
+            create: (tournamentID: number, body?: dtos.TournamentStubV4TournamentCodeParameters) => RengarRequest<string[]>
+            lobbyEvents: (tournamentCode: string) => RengarRequest<dtos.TournamentStubV4LobbyEventDTOWrapper>
+            registerProviderData: (region: string, callbackURL: string) => RengarRequest<number>
+            register: (providerID: number, name?: string) => RengarRequest<number>
         }
 
         public Tournament: {
-            create: (tournamentID: number, body?: dtos.TournamentV4TournamentCodeParameters) => KaynRequest<string[]>
-            update: (tournamentCode: string, body: dtos.TournamentV4TournamentCodeUpdateParameters) => KaynRequest<void>
-            get: (tournamentCode: string) => KaynRequest<dtos.TournamentV4TournamentCodeDTO>
-            lobbyEvents: (tournamentCode: string) => KaynRequest<dtos.TournamentV4LobbyEventDTOWrapper>
-            registerProviderData: (region: string, callbackURL: string) => KaynRequest<number>
-            register: (providerID: number, name?: string) => KaynRequest<number>
+            create: (tournamentID: number, body?: dtos.TournamentV4TournamentCodeParameters) => RengarRequest<string[]>
+            update: (tournamentCode: string, body: dtos.TournamentV4TournamentCodeUpdateParameters) => RengarRequest<void>
+            get: (tournamentCode: string) => RengarRequest<dtos.TournamentV4TournamentCodeDTO>
+            lobbyEvents: (tournamentCode: string) => RengarRequest<dtos.TournamentV4LobbyEventDTOWrapper>
+            registerProviderData: (region: string, callbackURL: string) => RengarRequest<number>
+            register: (providerID: number, name?: string) => RengarRequest<number>
         }
     }
 }
 
-type KaynError = {
+type RengarError = {
     statusCode: number
     url: string
     error: any
 }
 
-declare class KaynRequest<T> {
-    region(region: region): KaynRequest<T>
-    query(query: Object): KaynRequest<T>
-    then(resolve: (data: T) => void, reject?: (err: KaynError) => void): KaynRequest<T>
-    catch(callback: (err: KaynError) => void): void
+declare class RengarRequest<T> {
+    region(region: region): RengarRequest<T>
+    query(query: Object): RengarRequest<T>
+    then(resolve: (data: T) => void, reject?: (err: RengarError) => void): RengarRequest<T>
+    catch(callback: (err: RengarError) => void): void
     callback(callback: callback<T>): void
 }
 
@@ -189,22 +189,22 @@ type locale =
     | 'zh_MY'
     | 'zh_TW'
 
-declare class KaynDDragonRequest<T> {
-    version(version: string): KaynDDragonRequest<T>
-    locale(locale: locale): KaynDDragonRequest<T>
-    region(region: region): KaynDDragonRequest<T>
-    then(resolve: (data: T) => void, reject?: (err: KaynError) => void): KaynDDragonRequest<T>
-    catch(callback: (err: KaynError) => void): void
+declare class RengarDDragonRequest<T> {
+    version(version: string): RengarDDragonRequest<T>
+    locale(locale: locale): RengarDDragonRequest<T>
+    region(region: region): RengarDDragonRequest<T>
+    then(resolve: (data: T) => void, reject?: (err: RengarError) => void): RengarDDragonRequest<T>
+    catch(callback: (err: RengarError) => void): void
     callback(callback: callback<T>): void
 }
 
-type callback<T> = (err: KaynError, data: T) => void
+type callback<T> = (err: RengarError, data: T) => void
 
 // a lot of these are temp and will be improved in later releases.
 type serviceName = string
 type methodName = string
 type endpoint = string
-interface KaynConfig {
+interface RengarConfig {
     region?: region
     apiURLPrefix?: string
     debugOptions?: {
