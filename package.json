@@ -1,6 +1,6 @@
 {
-  "name": "rengar",
-  "version": "0.10.3",
+  "name": "rengar-api",
+  "version": "0.10.6",
   "main": "index.js",
   "scripts": {
     "example": "yarn lint-example; yarn build && babel ./example.js -o ./example.babel.js && node example.babel.js",
@@ -12,16 +12,19 @@
     "lint-scripts": "prettier --config=prettier.json --write \"./_scripts/**/*.js\"",
     "lint-typings": "prettier --config=prettier-typescript.json --write \"./typings/{,!(node_modules)/**/}*.ts\"",
     "lint": "yarn lint-src; yarn lint-example; yarn lint-test; yarn lint-examples; yarn lint-scripts; yarn lint-typings;",
-    "docs": "./node_modules/.bin/esdoc ./lib/**/*.js",
+    "docs": "esdoc ./lib/**/*.js",
     "test": "yarn build && yarn lint; yarn lint-test; yarn test-only",
-    "test-only": "node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- --require babel-register \"test/unit/**/*.spec.js\"",
+    "test-only": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- --require babel-register \"test/unit/**/*.spec.js\"",
     "test-integration": "yarn build && yarn lint; yarn lint-test; ./node_modules/.bin/babel-istanbul cover ./node_modules/mocha/bin/_mocha -- --require babel-register \"test/integration/**/*.spec.js\"",
     "swagger": "babel-node ./_scripts/generate_ts_from_swagger && yarn lint",
     "generate-api-cov": "babel-node ./_scripts/generate_api_cov_button"
   },
   "types": "./typings/index.d.ts",
-  "repository": "https://github.com/beckerin/rengar.git",
-  "author": "Chau Nguyen <chautnguyen96@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beckerin/rengar.git"
+  },
+  "author": "Diego Paiva <contato@paivadiego.com.br>",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -53,5 +56,21 @@
     "riot-ratelimiter-temp": "0.0.5",
     "superstruct": "^0.6.0",
     "supports-color": "^6.1.0"
-  }
+  },
+  "description": "A small Node.js library to work with Riot's League of Legend's API.",
+  "bugs": {
+    "url": "https://github.com/beckerin/rengar/issues"
+  },
+  "homepage": "https://github.com/beckerin/rengar#readme",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [
+    "kayn",
+    "based",
+    "api",
+    "updated"
+  ]
 }

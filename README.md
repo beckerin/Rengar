@@ -1,8 +1,8 @@
 A small Node.js library to work with Riot's League of Legend's API.
 
-[![NPM](https://nodei.co/npm/kayn.png)](https://nodei.co/npm/kayn/)
+[![NPM](https://nodei.co/npm/rengar.png)](https://nodei.co/npm/kayn/)
 
-[![Build Status](https://travis-ci.org/cnguy/kayn.svg?branch=master)](https://travis-ci.org/cnguy/kayn)
+[![Build Status](https://travis-ci.org/cnguy/rengar.svg?branch=master)](https://travis-ci.org/cnguy/kayn)
 [![API Cov. Badge](/_pictures/api_cov.png?raw=true "API Cov. Badge")](https://github.com/cnguy/kayn/blob/master/ENDPOINTS.md)
 [![codecov](https://codecov.io/gh/cnguy/kayn/branch/master/graph/badge.svg)](https://codecov.io/gh/cnguy/kayn)
 [![dependencies Status](https://david-dm.org/cnguy/kayn/status.svg)](https://david-dm.org/cnguy/kayn)
@@ -15,16 +15,16 @@ A small Node.js library to work with Riot's League of Legend's API.
 
 ```javascript
 const _kayn = require('kayn')
-const Kayn = _kayn.Kayn
-const REGIONS = _kayn.REGIONS
+const Kayn = _rengar.Kayn
+const REGIONS = _rengar.REGIONS
 
 const kayn = Kayn(/* process.env.RIOT_LOL_API_KEY */)(/* optional config */)
 
-kayn.Summoner.by
+rengar.Summoner.by
     .name('Contractz')
     .region(REGIONS.NORTH_AMERICA) // same as 'na'
     .callback(function(unhandledError, summoner) {
-        kayn.Matchlist.by
+        rengar.Matchlist.by
             .accountID(summoner.accountId)
             /* Note that region falls back to default if unused. */
             .query({
@@ -53,9 +53,9 @@ import { Kayn, REGIONS } from 'kayn'
 const kayn = Kayn(/* process.env.RIOT_LOL_API_KEY */)(/* optional config */)
 
 const main = async () => {
-    const { accountId } = await kayn.Summoner.by.name('Contractz')
+    const { accountId } = await rengar.Summoner.by.name('Contractz')
     // ^ default region is used, which is `na` unless specified in config
-    const { matches, totalGames } = await kayn.Matchlist.by
+    const { matches, totalGames } = await rengar.Matchlist.by
         .accountID(accountId)
         .query({ season: 11, champion: 67 })
         .region(REGIONS.NORTH_AMERICA)
@@ -86,14 +86,14 @@ const getChampionIdFromMatch = (match, accountId) => {
     }
 }
 
-const main = async kayn => {
-    const { accountId } = await kayn.SummonerV4.by.name('Contractz')
-    const rankGameIds = (await kayn.MatchlistV4.by
+const main = async rengar => {
+    const { accountId } = await rengar.SummonerV4.by.name('Contractz')
+    const rankGameIds = (await rengar.MatchlistV4.by
         .accountID(accountId)
         .query({ queue: 420 })).matches.map(el => el.gameId)
     const championIds = await Promise.all(
         rankGameIds.map(async gameId => {
-            const matchDetail = await kayn.MatchV4.get(gameId).region('na')
+            const matchDetail = await rengar.MatchV5.get(gameId).region('na')
             return getChampionIdFromMatch(matchDetail, accountId)
         }),
     )
@@ -110,11 +110,11 @@ const main = async kayn => {
 ####
 
 ```javascript
-const main = async (kayn) => {
-    const match = await kayn.Match.get(2877485196)
+const main = async (rengar) => {
+    const match = await rengar.Match.get(2877485196)
     const bans = match.teams.map(m => m.bans).reduce((t, c) => t.concat(c), [])
     const ids = bans.map(b => b.championId)
-    const ddragonChampions = await kayn.DDragon.Champion.listDataByIdWithParentAsId()
+    const ddragonChampions = await rengar.DDragon.Champion.listDataByIdWithParentAsId()
     const champions = ids.map(id => ddragonChampions.data[id])
     console.log(champions)
 }
@@ -126,11 +126,6 @@ const main = async (kayn) => {
 <details><summary>Example Selected Implementations</summary>
 
 <p>
-
-####
-- [Get last 10 matches asynchronously and efficiently (vs slower version as well)](https://github.com/cnguy/kayn/blob/master/examples/async.await/v4/get-last-10-ranked-matches-efficiently.js)
-- [Get champion name, win status, season id, and game date for past 5 ranked games of a player](https://github.com/cnguy/kayn/blob/master/examples/async.await/v4/get-detailed-info-from-last-5-ranked-matches.js)
-
 ... [More Examples](#more-examples)
 
 </p>
@@ -174,7 +169,7 @@ Check out [ENDPOINTS.md](https://github.com/cnguy/kayn/blob/master/ENDPOINTS.md)
 
 ## Documentation
 
-The auto-generated ESDoc documentation can be found [here](http://kayn.surge.sh).
+The auto-generated ESDoc documentation can be found [here](http://rengar.surge.sh).
 
 # Installation and Usage
 
@@ -242,7 +237,7 @@ RIOT_LOL_API_KEY=RGAPI-my-api-key
 ### Callbacks
 
 ```javascript
-kayn.Summoner.by.name('Contractz').callback(function(err, summoner) {
+rengar.Summoner.by.name('Contractz').callback(function(err, summoner) {
     // do something
 })
 ```
@@ -250,7 +245,7 @@ kayn.Summoner.by.name('Contractz').callback(function(err, summoner) {
 ### Promises
 
 ```javascript
-kayn.Summoner.by.name('Contractz')
+rengar.Summoner.by.name('Contractz')
     .then(summoner => doSomething(summoner))
     .then(console.log)
     .catch(error => console.error(error))
@@ -260,7 +255,7 @@ kayn.Summoner.by.name('Contractz')
 
 ```javascript
 const main = async () => {
-    const ctz = await kayn.Summoner.by.name('Contractz')
+    const ctz = await rengar.Summoner.by.name('Contractz')
 }
 ```
 
@@ -269,7 +264,7 @@ const main = async () => {
 This forces a request to target a specific region instead of the default region set in `kayn`'s config. If `.region()` is not used, `kayn` will use the default region to make requests.
 
 ```javascript
-kayn.Summoner.by.name('hide on bush')
+rengar.Summoner.by.name('hide on bush')
     .region(REGIONS.KOREA)
     .callback(function(error, summoner) {
         doSomething(summoner)
@@ -281,13 +276,13 @@ kayn.Summoner.by.name('hide on bush')
 There is another utility method in case if you want to avoid handling exceptions caused by `.region()`. This method simply catches `.region()`'s exception, and so it will fall back to the default region as well.
 
 ```javascript
-kayn.Summoner.by.name('hide on bush')
+rengar.Summoner.by.name('hide on bush')
     .regionNoThrow(null) // No error thrown. Uses default region.
 
-kayn.Summoner.by.name('hide on bush')
+rengar.Summoner.by.name('hide on bush')
     .regionNoThrow(3) // Same as above.
 
-kayn.Summoner.by.name('hide on bush')
+rengar.Summoner.by.name('hide on bush')
     .regionNoThrow('kr524') // Same as above.
 ```
 
@@ -296,7 +291,7 @@ kayn.Summoner.by.name('hide on bush')
 You can pass in strings, numbers, or arrays as values. Just pass in whatever Riot expects. :)
 
 ```javascript
-kayn.Matchlist.by.accountID(3440481)
+rengar.Matchlist.by.accountID(3440481)
     .region(REGIONS.KOREA)
     .query({
         season: 9,
@@ -326,7 +321,7 @@ Errors as of v0.8.7 return the following error object:
 This forces a request to target a specific version and is no longer mandatory as of `v0.8.22`.
 
 ```javascript
-kayn.DDragon.Champion.list()
+rengar.DDragon.Champion.list()
     .version('8.15.1') /* Explicit */
     .callback(function(error, champions) {
         console.log(champions)
@@ -334,13 +329,13 @@ kayn.DDragon.Champion.list()
 
 // Let's say the config region is North America and that the latest version
 // for the champion endpoint in NA is 8.24.1
-kayn.DDragon.Champion.list() // Implicitly targets 8.24.1
+rengar.DDragon.Champion.list() // Implicitly targets 8.24.1
     .callback(function(error, champions) {
         console.log(champions)
     })
 
 // Same thing as above, but gets the versions for a different region from the configuration.
-kayn.DDragon.Champion.list().region('br')
+rengar.DDragon.Champion.list().region('br')
     .callback(function(error, champions) {
         console.log(champions)
     })
@@ -363,7 +358,7 @@ kaynWithNoCache.DDragon.Champion.list().region('kr')
 
 ##### Cache Example
 ```javascript
-// Calls Kayn.Realm.list(), caches it, and then gets the version for North America's champion data. It then gets the champions. 
+// Calls rengar.Realm.list(), caches it, and then gets the version for North America's champion data. It then gets the champions. 
 kaynWithCache.DDragon.Champion.list()
 // Retrieves the cached version (because we already called the realm endpoint under the hood) for North America's champion data and then gets the champions.
 kaynWithCache.DDragon.Champion.list()
@@ -374,7 +369,7 @@ kaynWithCache.DDragon.Champion.list()
 This is only for /cdn/data/___/___.json-esque requests. It is a helper method that allows `kayn` to not force the user to have to pass in a version.
 
 ```javascript
-kayn.DDragon.Champion.list()
+rengar.DDragon.Champion.list()
     .region('kr')
     .locale('ko_KR')
 ```
@@ -384,14 +379,14 @@ kayn.DDragon.Champion.list()
 This forces a request to target a specific locale instead of the default locale set in `kayn`'s config. If `.locale()` is not used, `kayn` will use the default locale to make requests.
 
 ```javascript
-kayn.DDragon.Champion.list()
+rengar.DDragon.Champion.list()
     .version('8.15.1')
     .locale('sg_SG')
     .callback(function(error, champions) {
         console.log(champions)
     })
 
-kayn.DDragon.Champion.list()
+rengar.DDragon.Champion.list()
     .version('8.15.1')
     /* Locale not specified. Uses default locale, which is 'en_US' in the config and is adjustable. */
     .callback(function(error, champions) {
@@ -401,7 +396,7 @@ kayn.DDragon.Champion.list()
 
 ## Realm -> Version Example
 
-This example firstly hits the `Realm` endpoint, which grabs a list of versions where each version corresponds with some type of DDragon endpoint (`Champion`, `Item`, etc). I then grab the version associated with the `Champion` endpoint to get the latest static champion list for the NA region. Note that `kayn.DDragon.Realm.list` uses the default region or takes in a region specified, which is why I am able to avoid passing in extra arguments.
+This example firstly hits the `Realm` endpoint, which grabs a list of versions where each version corresponds with some type of DDragon endpoint (`Champion`, `Item`, etc). I then grab the version associated with the `Champion` endpoint to get the latest static champion list for the NA region. Note that `rengar.DDragon.Realm.list` uses the default region or takes in a region specified, which is why I am able to avoid passing in extra arguments.
 
 ```javascript
 const main = async () => {
@@ -422,7 +417,7 @@ const main = async () => {
     })
 
     /*
-        kayn.DDragon.Realm.list('na') =>
+        rengar.DDragon.Realm.list('na') =>
         {
         	"n": {
         		"item": "8.17.1",
@@ -447,8 +442,8 @@ const main = async () => {
     */
 
     // Same as `const championVersion = data.n.champion`.
-    const { n: { champion: championVersion } } = await kayn.DDragon.Realm.list(/* default region */)
-    const championList = await kayn.DDragon.Champion.list().version(championVersion)
+    const { n: { champion: championVersion } } = await rengar.DDragon.Realm.list(/* default region */)
+    const championList = await rengar.DDragon.Champion.list().version(championVersion)
     console.log(championList)
 }
 ```
@@ -624,9 +619,9 @@ const kayn = Kayn(/* optional key */)({
     },
 })
 
-kayn.Summoner.by
+rengar.Summoner.by
     .name('Contractz')
-    .then(() => kayn.Summoner.by.name('Contractz'))
+    .then(() => rengar.Summoner.by.name('Contractz'))
 
 /*
 200 @ https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/Contractz
@@ -707,24 +702,24 @@ Simply set `useDefault` in `timeToLives` to true. This option basically sets ttl
 ```javascript
 // BasicJSCache O(1)
 // synchronous
-kayn.flushCache()
+rengar.flushCache()
 // this has been turned into a promise so that it can be chained.
 // still can just be called normally though.
 // the `data` parameter returns "OK" just like in the RedisCache.
 async1
-  .then(() => kayn.flushCache())
+  .then(() => rengar.flushCache())
   .then(console.log) // prints OK always. there's no way to get an error.
   .catch(console.err)
 
 // RedisCache O(N)
 // asynchronous
-kayn.flushCache(function (err, ok) {
+rengar.flushCache(function (err, ok) {
   console.log(ok === "OK")
 })
 
 const flush = async () => {
   try {
-    await kayn.flushCache() // returns "OK", but not really necessary to store.
+    await rengar.flushCache() // returns "OK", but not really necessary to store.
   } catch (exception) {
     console.log(exception)
   }
@@ -732,7 +727,7 @@ const flush = async () => {
 
 async1
   .then(() => async2())
-  .then(() => kayn.flushCache())
+  .then(() => rengar.flushCache())
   .then(console.log)
   .catch(console.log)
 ```

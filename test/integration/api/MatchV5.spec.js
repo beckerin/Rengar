@@ -11,12 +11,12 @@ describe.skip('Match (integration)', function () {
   this.timeout(10000)
 
   it('should work', async function () {
-    const m = await rengar.MatchV4.get(2685891793)
+    const m = await rengar.MatchV5.get(2685891793)
     expect(m).to.deep.equal(match)
   })
 
   it('should work #2', async function () {
-    const m = await rengar.MatchV4.get(3066040334).region('kr')
+    const m = await rengar.MatchV5.get(3066040334).region('kr')
     expect(m).to.deep.equal(koreaMatch)
     expect(m.platformId).to.equal('KR')
   })

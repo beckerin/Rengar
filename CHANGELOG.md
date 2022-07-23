@@ -1,3 +1,19 @@
+
+#0.10.6
+Fix:
+  * fix routes to use Regions eg. Americas to Route as described on Riot API
+# 0.10.5 (Implements MatchV5 Code)
+* Add support to MatcV5 api from Riot
+Feat: 
+* Add `/lol/match/v5/matches/by-puuid/{puuid}/ids`
+* Add `/lol/match/v5/matches/{matchId}`
+* Add `/lol/match/v5/matches/{matchId}/timeline`
+Remove: 
+  * Older MatchV4 version non supported by riot since 2021
+
+# 0.10.2 Forked code from cnguy/kayn
+* Project mostly renamed to Rengar-Api
+
 # 0.10.2 (NPM PACKAGE FIXED)
 
 * Released 0.10.1 features
