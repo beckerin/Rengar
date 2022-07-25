@@ -1,3 +1,7 @@
+#0.10.9
+Fix: 
+    * fix match routes besides america not running
+
 
 #0.10.6
 Fix:

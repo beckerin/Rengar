@@ -1,6 +1,6 @@
 {
   "name": "rengar-api",
-  "version": "0.10.6",
+  "version": "0.10.9",
   "main": "index.js",
   "scripts": {
     "example": "yarn lint-example; yarn build && babel ./example.js -o ./example.babel.js && node example.babel.js",
