@@ -1,11 +1,11 @@
-A small Node.js library to work with Riot's League of Legend's API.
+A small Node.js library to work with Riot's League of Legend's API. Based on [Cnguy/Kayn](https://github.com/cnguy/kayn)
 
-[![NPM](https://nodei.co/npm/rengar.png)](https://nodei.co/npm/kayn/)
+[![NPM](https://nodei.co/npm/rengar-api.png)](https://nodei.co/npm/rengar-api/)
 
-[![Build Status](https://travis-ci.org/cnguy/rengar.svg?branch=master)](https://travis-ci.org/cnguy/kayn)
-[![API Cov. Badge](/_pictures/api_cov.png?raw=true "API Cov. Badge")](https://github.com/cnguy/kayn/blob/master/ENDPOINTS.md)
-[![codecov](https://codecov.io/gh/cnguy/kayn/branch/master/graph/badge.svg)](https://codecov.io/gh/cnguy/kayn)
-[![dependencies Status](https://david-dm.org/cnguy/kayn/status.svg)](https://david-dm.org/cnguy/kayn)
+[![Build Status](https://travis-ci.org/cnguy/rengar.svg?branch=master)](https://travis-ci.org/beckerin/rengar)
+[![API Cov. Badge](/_pictures/api_cov.png?raw=true "API Cov. Badge")](https://github.com/beckerin/rengar/blob/master/ENDPOINTS.md)
+[![codecov](https://codecov.io/gh/beckerin/rengar/branch/master/graph/badge.svg)](https://codecov.io/gh/beckerin/rengar)
+[![dependencies Status](https://david-dm.org/beckerin/rengar/status.svg)](https://david-dm.org/beckerin/rengar)
 
 <details><summary>Simple example using promises and callbacks</summary>
 
@@ -14,11 +14,11 @@ A small Node.js library to work with Riot's League of Legend's API.
 ####
 
 ```javascript
-const _kayn = require('kayn')
-const Kayn = _rengar.Kayn
+const _rengar = require('rengar')
+const Rengar = _rengar.Rengar
 const REGIONS = _rengar.REGIONS
 
-const kayn = Kayn(/* process.env.RIOT_LOL_API_KEY */)(/* optional config */)
+const rengar = Rengar(/* process.env.RIOT_LOL_API_KEY */)(/* optional config */)
 
 rengar.Summoner.by
     .name('Contractz')
@@ -48,9 +48,9 @@ rengar.Summoner.by
 ####
 
 ```javascript
-import { Kayn, REGIONS } from 'kayn'
+import { Rengar, REGIONS } from 'rengar'
 
-const kayn = Kayn(/* process.env.RIOT_LOL_API_KEY */)(/* optional config */)
+const rengar = Rengar(/* process.env.RIOT_LOL_API_KEY */)(/* optional config */)
 
 const main = async () => {
     const { accountId } = await rengar.Summoner.by.name('Contractz')
@@ -147,7 +147,7 @@ const main = async (rengar) => {
 
 Handled by [Colorfulstan](https://github.com/Colorfulstan)'s wonderful [riot-ratelimiter](https://github.com/Colorfulstan/RiotRateLimiter-node).
 
-See [RATELIMITING.md](https://github.com/cnguy/kayn/blob/master/RATELIMITING.md).
+See [RATELIMITING.md](https://github.com/beckerin/rengar/blob/master/RATELIMITING.md).
 
 ## All Endpoints Covered
 
@@ -165,7 +165,7 @@ As of v0.8.0, full DTO's are provided thanks to [MingweiSamuel](https://github.c
 
 # Methods
 
-Check out [ENDPOINTS.md](https://github.com/cnguy/kayn/blob/master/ENDPOINTS.md) to see kayn's methods, as well as the endpoints covered.
+Check out [ENDPOINTS.md](https://github.com/beckerin/rengar/blob/master/ENDPOINTS.md) to see rengar's methods, as well as the endpoints covered.
 
 ## Documentation
 
@@ -178,20 +178,20 @@ The minimum required [Node.js version is v7.6.0](https://nodejs.org/en/blog/rele
 ## npm
 
 ```sh
-npm i --save kayn
+npm i --save rengar-api
 ```
 
 ## yarn
 
 ```sh
-yarn add kayn
+yarn add rengar-api
 ```
 
-### Quick Setup with [Default Config](https://github.com/cnguy/kayn/blob/master/lib/KaynConfig.js)
+### Quick Setup with [Default Config](https://github.com/beckerin/rengar/blob/master/lib/RengarConfig.js)
 
 ```javascript
-const { Kayn, REGIONS } = require('kayn')
-const kayn = Kayn('RGAPI-my-api-key')(/*{
+const { Rengar, REGIONS } = require('rengar')
+const rengar = Rengar('RGAPI-my-api-key')(/*{
     region: REGIONS.NORTH_AMERICA,
     apiURLPrefix: 'https://%s.api.riotgames.com',
     locale: 'en_US',
@@ -222,12 +222,12 @@ const kayn = Kayn('RGAPI-my-api-key')(/*{
 ### Environment Variables
 
 ```javascript
-const kayn = Kayn(/* process.env.RIOT_LOL_API_KEY */)(myConfig)
+const rengar = Rengar(/* process.env.RIOT_LOL_API_KEY */)(myConfig)
 ```
 
 Although it is possible to manually pass in the API key, it is preferable to store the key in a secret file (which should not be committed).
 
-This allows `kayn` to be constructed like in the above code.
+This allows `rengar` to be constructed like in the above code.
 
 ```sh
 # filename: .env
@@ -261,7 +261,7 @@ const main = async () => {
 
 ### Region
 
-This forces a request to target a specific region instead of the default region set in `kayn`'s config. If `.region()` is not used, `kayn` will use the default region to make requests.
+This forces a request to target a specific region instead of the default region set in `rengar`'s config. If `.region()` is not used, `rengar` will use the default region to make requests.
 
 ```javascript
 rengar.Summoner.by.name('hide on bush')
@@ -343,30 +343,30 @@ rengar.DDragon.Champion.list().region('br')
 
 #### Notes about Optional Version Argument
 
-Whenever you make a request that does not have a version passed in, `kayn` will automatically grab all the JSON versions associated with your default region or through the `region()` method.
+Whenever you make a request that does not have a version passed in, `rengar` will automatically grab all the JSON versions associated with your default region or through the `region()` method.
 
 If you do not have caching enabled, note that each request with no version passed will always send an additional request for grabbing the version. Otherwise, it follows standard caching.
 
 ##### No Cache Example
 ```javascript
 // Calls the Realm list endpoint to get the version for North America's champion data. It then gets the champions.
-kaynWithNoCache.DDragon.Champion.list()
+rengarWithNoCache.DDragon.Champion.list()
 
 // Gets versions for 'kr' instead of default region.
-kaynWithNoCache.DDragon.Champion.list().region('kr')
+rengarWithNoCache.DDragon.Champion.list().region('kr')
 ```
 
 ##### Cache Example
 ```javascript
 // Calls rengar.Realm.list(), caches it, and then gets the version for North America's champion data. It then gets the champions. 
-kaynWithCache.DDragon.Champion.list()
+rengarWithCache.DDragon.Champion.list()
 // Retrieves the cached version (because we already called the realm endpoint under the hood) for North America's champion data and then gets the champions.
-kaynWithCache.DDragon.Champion.list()
+rengarWithCache.DDragon.Champion.list()
 ```
 
 ### Region
 
-This is only for /cdn/data/___/___.json-esque requests. It is a helper method that allows `kayn` to not force the user to have to pass in a version.
+This is only for /cdn/data/___/___.json-esque requests. It is a helper method that allows `rengar` to not force the user to have to pass in a version.
 
 ```javascript
 rengar.DDragon.Champion.list()
@@ -376,7 +376,7 @@ rengar.DDragon.Champion.list()
 
 ### Locale
 
-This forces a request to target a specific locale instead of the default locale set in `kayn`'s config. If `.locale()` is not used, `kayn` will use the default locale to make requests.
+This forces a request to target a specific locale instead of the default locale set in `rengar`'s config. If `.locale()` is not used, `rengar` will use the default locale to make requests.
 
 ```javascript
 rengar.DDragon.Champion.list()
@@ -400,7 +400,7 @@ This example firstly hits the `Realm` endpoint, which grabs a list of versions w
 
 ```javascript
 const main = async () => {
-    const kayn = Kayn('RGAPI-my-api-key')({
+    const rengar = Rengar('RGAPI-my-api-key')({
         region: REGIONS.NORTH_AMERICA,
         locale: 'en_US',
         debugOptions: {
@@ -513,8 +513,8 @@ These functions also cache their own data, separate from the functions that make
 
 # More Examples
 
-* [Regular JavaScript](https://github.com/cnguy/kayn/tree/master/examples/es5)
-* [Async Await](https://github.com/cnguy/kayn/tree/master/examples/async.await)
+* [Regular JavaScript](https://github.com/beckerin/rengar/tree/master/examples/es5)
+* [Async Await](https://github.com/beckerin/rengar/tree/master/examples/async.await)
 
 # Configuration
 
@@ -560,7 +560,7 @@ This option will force the process to quit if your API key is blacklisted or inv
 
 ## Cache Options
 
-To cache, firstly create some cache that implements the `get` and `set` functions that `kayn` interfaces with, and then pass that cache instance to `cacheOptions.cache`.
+To cache, firstly create some cache that implements the `get` and `set` functions that `rengar` interfaces with, and then pass that cache instance to `cacheOptions.cache`.
 
 `ttls` are method ttls. This part is pretty inconvenient right now. Suggestions are welcome.
 
@@ -572,12 +572,12 @@ Current caches:
 For the last two caches, the options that they take are the same options that their respective docs list out. In other words, I basically export wrappers that takes in the options and just passes it to the actual cache client.
 
 ```javascript
-import { Kayn, REGIONS, METHOD_NAMES, BasicJSCache, LRUCache, RedisCache } from 'kayn'
+import { Rengar, REGIONS, METHOD_NAMES, BasicJSCache, LRUCache, RedisCache } from 'rengar'
 
 const redisCache = new RedisCache({
     host: 'localhost',
     port: 5000,
-    keyPrefix: 'kayn',
+    keyPrefix: 'rengar',
     password: 'hello-world',
     // etc...
 })
@@ -593,7 +593,7 @@ const basicCache = new BasicJSCache()
 
 const myCache = redisCache // or basicCache/lruCache
 
-const kayn = Kayn(/* optional key */)({
+const rengar = Rengar(/* optional key */)({
     region: 'na',
     locale: 'en_US',
     debugOptions: {
@@ -739,11 +739,11 @@ When logging, URLs printed out on the screen will also have the API key query st
 
 ### loggers
 
-`kayn` now uses [debug](https://www.npmjs.com/package/debug) for all logging purposes.
+`rengar` now uses [debug](https://www.npmjs.com/package/debug) for all logging purposes.
 
 Here are the current namespaces:
 
-kayn
+rengar
   * init
   * request
     * incoming
@@ -759,15 +759,15 @@ To enable debugging, firstly make sure `config.debugOptions.isEnabled` is `true`
 For example, if you wish to only see the request errors (404, 420, 503, 500, etc), run:
 
 ```sh
-DEBUG=kayn:request:incoming:error <command>
-# DEBUG=kayn:*:error works too.
+DEBUG=rengar:request:incoming:error <command>
+# DEBUG=rengar:*:error works too.
 ```
 
 ...where command runs the script/server/whatever (`npm run start`, `yarn start`, `node index.js`).
 
 To enable all loggers, simply run:
 ```sh
-DEBUG=kayn:* <command>
+DEBUG=rengar:* <command>
 ```
 
 # My Project
@@ -803,7 +803,7 @@ to build. `yarn example` runs this command
 
 ## General Workflow
 
-Here's my general workflow when it comes to `kayn`.
+Here's my general workflow when it comes to `rengar`.
 
 Note: You don't have to worry about editor configuration as long as you follow the steps.
 
@@ -812,7 +812,7 @@ Note: You don't have to worry about editor configuration as long as you follow t
 * Run `yarn test` to make sure test is failing
 * Write implementation and run `yarn test` on completion
 * You can manually test requests in `example.js` using your own API key
-    * Preferrable just to use a .env file with kayn's default key (RIOT_LOL_API_KEY)
+    * Preferrable just to use a .env file with rengar's default key (RIOT_LOL_API_KEY)
     * Run `yarn example` and verify behavior manually
 * Remove `describe.only` from your tests and run the entire test suite
 * When tests pass and manual testing went well, run `yarn lint`
@@ -820,13 +820,13 @@ Note: You don't have to worry about editor configuration as long as you follow t
 
 # Changelog
 
-[CHANGELOG.md](https://github.com/cnguy/kayn/blob/master/CHANGELOG.md).
+[CHANGELOG.md](https://github.com/beckerin/rengar/blob/master/CHANGELOG.md).
 
 As long this library is pre-1.0.0, breaking changes may be made, but will be documented and will generally not be drastic. Upon 1.0.0, SemVer will be followed strictly.
 
 # Disclaimer
 
-`kayn` isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+`rengar` isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
 
 # FAQ
 
